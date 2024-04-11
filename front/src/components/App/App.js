@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppAdmin from '../Admin/App/App';
 import AppMarket from '../Front/App/App';
 import NoPage from '../NoPage/NoPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {

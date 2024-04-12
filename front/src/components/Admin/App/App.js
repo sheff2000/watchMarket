@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import AdminMenu from '../AdminMenu/AdminMenu';
+import ProductControl from '../ProductControl/ProductControl';
+import CategoryControl from '../CategpryControl/CategoryControl';
+import BrandControl from '../BrandControl/BrandControl';
+import TypeWatchControl from '../TypeWatchControl/TypeWatchControl';
 
 function AppAdmin() {
+
+  const [activeButton, setActiveButton] = useState('control_product');
+
+    const handleActiveButtonChange = (newButton) => {
+        setActiveButton(newButton);
+    };
+
+  // в зависимости что за меню у нас активно - выводим форму управления для него
+  const getActiveComponent = () => {
+    switch (activeButton) {
+        case 'control_product':
+            return <ProductControl />;
+        case 'control_category':
+            return <CategoryControl />;
+        case 'control_brand':
+            return <BrandControl />;
+        case 'control_type':
+            return <TypeWatchControl />;
+        default:
+            return <ProductControl />;
+    }
+  };
+
   return (
     <div className='container-fluid'>
        <div className='row'>
@@ -16,26 +43,13 @@ function AppAdmin() {
                     <button type="button" className="btn btn-outline-warning" disabled>Exit</button>
                   </div>
                   <hr/>
-                  <AdminMenu />
+                  <AdminMenu nowActiveBtn={activeButton} onActiveBtnChange={handleActiveButtonChange}/>
               </div>
             </div>
             
           </div>
           <div className='col-md-8'>
-            content<br></br>
-            content<br></br>
-            content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>
-            content<br></br>content<br></br>content<br></br>content<br></br>
-
+            {getActiveComponent()}
           </div>
        </div>
     </div>

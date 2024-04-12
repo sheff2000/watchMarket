@@ -1,18 +1,15 @@
 import React from 'react';
 import './App.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Content from '../Content/Content';
 
 function AppMarket() {
   return (
-    <div>
-        <h1>Market</h1>
-        <div className='row'>
-            <div className='col-md-4'>
-               This is MARKET
-            </div>
-            <div className='col-md-8'>
-                btn 
-            </div>
-        </div>
+    <div className='fix-foot d-flex flex-column h-100'>
+        <Header />
+        <Content />
+        <Footer />
     </div>
   );
 }

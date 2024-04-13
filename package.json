@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "watch market  Team: Sergej + Akim",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm start",

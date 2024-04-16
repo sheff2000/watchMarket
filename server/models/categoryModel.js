@@ -39,7 +39,7 @@ const updateCategory = async (id, data) => {
 
 // delete category
 const deleteCategory = async (id) => {
-    return await Category.findByIdAndDelete(id);
+    return await categoryModel.findByIdAndDelete(id);
 };
 
 const CategoryWatch = {

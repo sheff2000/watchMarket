@@ -1,7 +1,7 @@
 // набор маршрутов для работы с актегориями
 // создание - обновление - удаление - чтение
 import { Router } from 'express';
-import categoryController from '../controllers/categoryController';
+import categoryController from '../controllers/categoryController.js';
 
 const categoryRouter = Router();
 

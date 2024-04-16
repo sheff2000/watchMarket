@@ -1,7 +1,7 @@
 // набор маршрутов для работы с товарами (часами)
 // создание - обновление - удаление - чтение
 import { Router } from 'express';
-import watchControllers from '../controllers/watchController';
+import watchControllers from '../controllers/watchController.js';
 
 
 const watchRouter = Router();

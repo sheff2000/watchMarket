@@ -7,7 +7,7 @@ const brandRouter = Router();
 console.log('router ...');
 brandRouter.get('/', brandController.getBrendList);
 brandRouter.post('/', brandController.addBrend);
-//brandRouter.delete('/:id');
+brandRouter.delete('/:id', brandController.deleteBrand);
 //brandRouter.patch('/:id');
 
 export default brandRouter;

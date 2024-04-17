@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import marketApi from '../../../../api/watchServerApi';
 
-function BrandForm() {
+function BrandForm({onAddBrandEvent}) {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -20,6 +20,7 @@ function BrandForm() {
         event.preventDefault();
         try {
             const result = await marketApi.brandApi.addBrand(formData);
+            onAddBrandEvent();
             console.log('Success:', result);
             setFormData({
                 name: '',

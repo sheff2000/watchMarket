@@ -18,6 +18,23 @@ const addBrend = async (req, res, next) => {
     };
 };
 
+const deleteBrand = async (req, res, next) => {
+    console.log('controll delete');
+    try {
+
+        const id = req.params.id;
+            
+        const result = await brandService.deleteBrand(id);
+        
+        return res.status(200).json(result);
+    } catch (err) {
+        console.log('Error  - ', err);
+        const error = new Error(err.debug || "Internal server error");
+        error.status = error.status || 500;
+        return next(error);
+    };
+};
+
 const getBrendList = async (req, res, next) => {
     console.log('controll add');
     try {
@@ -37,6 +54,7 @@ const getBrendList = async (req, res, next) => {
 const brandController = {
     addBrend,
     getBrendList,
+    deleteBrand,
 };
 
 export default brandController;

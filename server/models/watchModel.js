@@ -4,17 +4,17 @@ import mongoose from 'mongoose';
  */
 
 const watchSchema = new mongoose.Schema({
-    name: { 
+    nameWatch: { 
         type: String, 
         required: true,
     },
-    instock: {
+    inStock: {
         type: Boolean,
         required: true,
     },
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date,
-    imageUrl: [String],
+    imageUrl: String,
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
@@ -25,9 +25,9 @@ const watchSchema = new mongoose.Schema({
     },
     collection: String,
     countryMade: String,
-    forMan: String, 
-    color: String,
-    manual: String,
+    gender: String, 
+    caseColor: String,
+    mechanism: String,
     material: String,
 });
 

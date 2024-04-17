@@ -7,7 +7,7 @@ import watchControllers from '../controllers/watchController.js';
 const watchRouter = Router();
 
 watchRouter.get('/', watchControllers.getAllWatchs);
-watchRouter.post('/');
+watchRouter.post('/', watchControllers.add);
 watchRouter.delete('/:id');
 watchRouter.patch('/:id');
 

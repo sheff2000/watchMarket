@@ -21,14 +21,22 @@ function ProductControl() {
         fetchBrands();
     }, []); 
 
-    const fetchWatchs = async () => {
+    const [watches, setWatches] = useState([]);
+
+    // Функция для загрузки и обновления списка часов
+    const fetchWatches = async () => {
         try {
-            const watchsData = await marketApi.watch.getWatchList();
-            return watchsData;
+            const watchesData = await marketApi.watch.getWatchList();
+            setWatches(watchesData);
         } catch (error) {
-            console.error('Failed to load brands:', error);
+            console.error('Failed to load watches:', error);
         }
     };
+
+    useEffect(() => {
+        fetchWatches();  // Загрузка списка часов при монтировании компонента
+    }, []);
+
 
     const handleButtonClick = (buttonName) => {
         setActiveList(buttonName);
@@ -37,7 +45,7 @@ function ProductControl() {
     const handleAddWatch = async (formData) => {
         try {
             await marketApi.watch.addWatch(formData);
-
+            fetchWatches();
         } catch (error) {
             console.error('Failed to delete brand:', error);
         }
@@ -48,7 +56,7 @@ function ProductControl() {
             case 'product_add':
                 return <AddProductForm brands={brands} onSubmit={handleAddWatch}/>;
             case 'product_list':
-                return <ProductList watchs={fetchWatchs} />;
+                return <ProductList watchs={watches} />;
             default:
                 return <AddProductForm brands={brands} onSubmit={handleAddWatch}/>;
         }

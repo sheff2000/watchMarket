@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 function AddProductForm({ brands, onSubmit }) {
     const [formData, setFormData] = useState({
-        modelName: '',
+        nameWatch: '',
         inStock: false,
         price: '',
-        photoUrls: '',
+        imageUrl: '',
         gender: '',
         caseColor: '',
         mechanism: '',
@@ -25,10 +25,10 @@ function AddProductForm({ brands, onSubmit }) {
         e.preventDefault();
         onSubmit(formData);
         setFormData({
-            modelName: '',
+            nameWatch: '',
             inStock: false,
             price: '',
-            photoUrls: '',
+            imageUrl: '',
             gender: '',
             caseColor: '',
             mechanism: '',
@@ -45,7 +45,7 @@ function AddProductForm({ brands, onSubmit }) {
                     type="text"
                     className="form-control"
                     id="validationCustom01"
-                    name="modelName"
+                    name="nameWatch"
                     value={formData.modelName}
                     onChange={handleChange}
                     placeholder="Годинник Casio G-SHOCK Classic GA-110-1BER"
@@ -66,7 +66,7 @@ function AddProductForm({ brands, onSubmit }) {
             </div>
             <div className="col-12">
                 <label htmlFor="formFileMultiple" className="form-label">Ссылки на фотографии (разделённые ';')</label>
-                <textarea className="form-control" id="formFileMultiple" name="photoUrls" value={formData.photoUrls} onChange={handleChange} required></textarea>
+                <textarea className="form-control" id="formFileMultiple" name="imageUrl" value={formData.photoUrls} onChange={handleChange} required></textarea>
             </div>
             <div className="col-md-6">
                 <label for="validationCustom04" className="form-label">Пол</label>
@@ -93,7 +93,7 @@ function AddProductForm({ brands, onSubmit }) {
                 <select className="form-select" id="validationCustom04" name="brand" value={formData.brand} onChange={handleChange} required>
                     <option selected disabled value="">выбрать...</option>
                     {brands.map(brand => (
-                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                        <option key={brand._id} value={brand._id}>{brand.name}</option>
                     ))}
                 </select>
             </div>

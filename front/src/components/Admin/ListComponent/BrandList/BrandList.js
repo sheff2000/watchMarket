@@ -8,7 +8,7 @@ function BrandList({ brands, onDeleteBrand }) {
             {brands.map((brand, index) => (
                 <li key={index}>
                     {brand.name} <br/>
-                    <img src={brand.imageUrl} alt={brand.name} style={{ width: '100px' }} />
+                    <img src={brand.imageUrl} alt={brand.name} style={{ width: '100px', backgroundColor:'black' }} />
                     <span className='btn btn-outline-danger' onClick={() => onDeleteBrand(brand._id)}>Удалить</span>
                 </li>
             ))}

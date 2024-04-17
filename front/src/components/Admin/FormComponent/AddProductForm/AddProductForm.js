@@ -1,79 +1,76 @@
+import React, { useState } from 'react';
 
-function AddProductForm(){
+function AddProductForm({ brands, onSubmit }) {
+    const [formData, setFormData] = useState({
+        modelName: '',
+        inStock: false,
+        price: '',
+        photoUrls: '',
+        gender: '',
+        caseColor: '',
+        mechanism: '',
+        material: '',
+        brand: ''
+    });
 
-    return(
-        <form className="row g-3 needs-validation" novalidate>
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit(formData);
+        setFormData({
+            modelName: '',
+            inStock: false,
+            price: '',
+            photoUrls: '',
+            gender: '',
+            caseColor: '',
+            mechanism: '',
+            material: '',
+            brand: ''
+        });
+    };
+
+    return (
+        <form className="row g-3" onSubmit={handleSubmit} noValidate>
             <div className="col-12">
-                <label for="validationCustom01" className="form-label">Название модели</label>
+                <label htmlFor="validationCustom01" className="form-label">Название модели</label>
                 <input
                     type="text"
                     className="form-control"
                     id="validationCustom01"
-                    value="" 
-                    placeholder="Годинник Casio G-SHOCK Classic GA-110-1BER"    
+                    name="modelName"
+                    value={formData.modelName}
+                    onChange={handleChange}
+                    placeholder="Годинник Casio G-SHOCK Classic GA-110-1BER"
                     required 
                 />
-                <div className="valid-feedback">
-                good
-                </div>
             </div>
             <div className="col-4">
                 <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required />
-                <label className="form-check-label" for="invalidCheck">
-                    В наличии на складе
-                </label>
+                    <input className="form-check-input" type="checkbox" name="inStock" checked={formData.inStock} onChange={handleChange} id="invalidCheck" required />
+                    <label className="form-check-label" htmlFor="invalidCheck">
+                        В наличии на складе
+                    </label>
                 </div>
             </div>
             <div className="col-md-8">
-                <label for="validationCustom10" className="form-label">Цена (грн)</label>
-                <input type="text" className="form-control" id="validationCustom10" placeholder="99999" required />
-                <div className="valid-feedback">
-                Looks good!
-                </div>
+                <label htmlFor="validationCustom10" className="form-label">Цена (грн)</label>
+                <input type="text" className="form-control" id="validationCustom10" name="price" value={formData.price} onChange={handleChange} placeholder="99999" required />
             </div>
             <div className="col-12">
-                <label for="formFileMultiple" class="form-label">Загрузка фотографий</label>
-                <input class="form-control" type="file" id="formFileMultiple" multiple required/>
-                <div className="valid-feedback">
-                file selected
-                </div>
+                <label htmlFor="formFileMultiple" className="form-label">Ссылки на фотографии (разделённые ';')</label>
+                <textarea className="form-control" id="formFileMultiple" name="photoUrls" value={formData.photoUrls} onChange={handleChange} required></textarea>
             </div>
-            <div className="col-md-4">
-                <label for="validationCustom08" className="form-label">Бренд</label>
-                <select className="form-select" id="validationCustom08" required>
-                    <option selected disabled value="">выбрать...</option>
-                </select>
-                <div className="valid-feedback">
-                Looks good!
-                </div>
-            </div>
-            <div className="col-md-8">
-                <label for="validationCustom09" className="form-label">Коллекция</label>
-                <input type="text" className="form-control" id="validationCustom09" placeholder="G-Shock" required />
-                <div className="valid-feedback">
-                Looks good!
-                </div>
-            </div>
-            <div className="col-md-4">
-                <label for="validationCustom02" className="form-label">Страна производитель</label>
-                <select className="form-select" id="validationCustom02" required>
-                    <option selected disabled value="">выбрать...</option>
-                </select>
-                <div className="valid-feedback">
-                Looks good!
-                </div>
-            </div>
-            <div className="col-md-8">
-                <label for="validationCustom03" className="form-label">Добавить новую страну</label>
-                <input type="text" className="form-control" id="validationCustom03" placeholder="Япония" required />
-                <div className="valid-feedback">
-                Looks good!
-                </div>
-            </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
                 <label for="validationCustom04" className="form-label">Пол</label>
-                <select className="form-select" id="validationCustom04" required>
+                <select className="form-select" id="validationCustom04" name='gender' value={formData.gender} onChange={handleChange} required>
                     <option selected disabled value="">выбрать...</option>
                     <option value="man">Мужской</option>
                     <option value="girl">Женский</option>
@@ -83,16 +80,26 @@ function AddProductForm(){
                 Looks good!
                 </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-6">
                 <label for="validationCustom05" className="form-label">Цвет корпуса</label>
-                <input type="text" className="form-control" id="validationCustom05" placeholder="Красный" required />
+                <input type="text" className="form-control" id="validationCustom05" name="caseColor" value={formData.caseColor} onChange={handleChange} placeholder="Красный" required />
+
                 <div className="valid-feedback">
                 Looks good!
                 </div>
             </div>
             <div className="col-md-4">
+                <label htmlFor="validationCustom04" className="form-label">Бренд</label>
+                <select className="form-select" id="validationCustom04" name="brand" value={formData.brand} onChange={handleChange} required>
+                    <option selected disabled value="">выбрать...</option>
+                    {brands.map(brand => (
+                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="col-md-4">
                 <label for="validationCustom06" className="form-label">Механизм</label>
-                <select className="form-select" id="validationCustom06" required>
+                <select className="form-select" id="validationCustom06" name="mechanism" value={formData.mechanism} onChange={handleChange} required>
                     <option selected disabled value="">выбрать...</option>
                     <option value="autokvarc">Автокварцевый</option>
                     <option value="kvarc">Кварц</option>
@@ -105,7 +112,7 @@ function AddProductForm(){
             </div>
             <div className="col-md-8">
                 <label for="validationCustom07" className="form-label">Материал</label>
-                <select className="form-select" id="validationCustom07" required>
+                <select className="form-select" id="validationCustom07" name="material" value={formData.material} onChange={handleChange} required>
                     <option selected disabled value="">выбрать...</option>
                     <option value="autokvarc">Каучук</option>
                     <option value="kvarc">Керамика</option>
@@ -116,14 +123,11 @@ function AddProductForm(){
                 Looks good!
                 </div>
             </div>
-            <br/><br/>
             <div className="col-12">
                 <button className="btn btn-outline-success" type="submit">Создать товар</button>
             </div>
-            <br/>
-            <hr/>
         </form>
     );
-};
+}
 
 export default AddProductForm;

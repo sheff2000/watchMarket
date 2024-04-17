@@ -1,5 +1,5 @@
 
-function ProductList() {
+function ProductList(watchs) {
 
     return(
         <>

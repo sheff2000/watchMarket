@@ -17,6 +17,9 @@ app.use(json());
 app.use(express.urlencoded({ extended: true }));
 
 // Подключение маршрутов
+app.get('/', (req, res) => {
+  res.send('Да, работаю');
+});
 app.use('/api/category', categoryRouter);
 app.use('/api/brand', brandRouter);
 app.use('/api/watch', watchRouter);

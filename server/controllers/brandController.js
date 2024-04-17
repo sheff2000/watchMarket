@@ -2,6 +2,7 @@ import brandService from '../services/brendService.js';
 
 // контроллеры для маршрутов по работе с брендами
 const addBrend = async (req, res, next) => {
+    console.log('controll add');
     try {
 
         const data = req.body.formData;
@@ -10,8 +11,8 @@ const addBrend = async (req, res, next) => {
         
         return res.status(200).json(result);
     } catch (err) {
-        // console.log('Error in login - ', err);
-        const error = new Error(err.message || "Internal server error");
+        console.log('Error  - ', err);
+        const error = new Error(err.debug || "Internal server error");
         error.status = error.status || 500;
         return next(error);
     };

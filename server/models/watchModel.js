@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import generateTranslit from '../utilits/translit.js';
 /**
  * схема и функции работы с часами (товаром)
  */
@@ -8,11 +7,6 @@ const watchSchema = new mongoose.Schema({
     name: { 
         type: String, 
         required: true,
-    },
-    translit: {
-        type: String,
-        required: true,
-        unique: true,
     },
     instock: {
         type: Boolean,
@@ -35,13 +29,6 @@ const watchSchema = new mongoose.Schema({
     color: String,
     manual: String,
     material: String,
-});
-
-watchSchema.pre('save', function(next) {
-    if (this.isModified('name')) {
-        this.translit = generateTranslit(this.name);
-    }
-    next();
 });
 
 const watchModel = mongoose.model('Watch', watchSchema);

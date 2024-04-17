@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import generateTranslit from '../utilits/translit.js';
 /**
  * схема и функции работы с Брендами для часов
  */
@@ -9,19 +8,7 @@ const brandSchema = new mongoose.Schema({
         type: String, 
         required: true,
     },
-    translit: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     imageUrl: String,
-});
-
-brandSchema.pre('save', function(next) {
-    if (this.isModified('name')) {
-        this.translit = generateTranslit(this.name);
-    }
-    next();
 });
 
 const brandModel = mongoose.model('Brand', brandSchema);

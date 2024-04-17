@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import generateTranslit from '../utilits/translit.js';
 /***
  * схема и функции для работы с коллецией - Категории часов
  */
@@ -9,10 +8,6 @@ const categorySchema = new mongoose.Schema({
         required: true,
     },
     desc: String,
-    translit: {
-        type: String,
-        required: true,
-    },
     imageUrl: String,
 });
 

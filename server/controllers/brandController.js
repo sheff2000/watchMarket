@@ -18,8 +18,25 @@ const addBrend = async (req, res, next) => {
     };
 };
 
+const getBrendList = async (req, res, next) => {
+    console.log('controll add');
+    try {
+
+        const result = await brandService.getBrendList();
+        
+        return res.status(200).json(result);
+    } catch (err) {
+        console.log('Error  - ', err);
+        const error = new Error(err.debug || "Internal server error");
+        error.status = error.status || 500;
+        return next(error);
+    };
+};
+
+
 const brandController = {
     addBrend,
+    getBrendList,
 };
 
 export default brandController;

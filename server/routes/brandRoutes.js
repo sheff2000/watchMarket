@@ -5,9 +5,9 @@ import brandController from '../controllers/brandController.js';
 
 const brandRouter = Router();
 console.log('router ...');
-//categoryRouter.get('/', categoryController.getAllCategorys);
+brandRouter.get('/', brandController.getBrendList);
 brandRouter.post('/', brandController.addBrend);
-//categoryRouter.delete('/:id');
-//categoryRouter.patch('/:id');
+//brandRouter.delete('/:id');
+//brandRouter.patch('/:id');
 
 export default brandRouter;

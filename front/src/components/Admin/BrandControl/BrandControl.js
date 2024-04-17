@@ -1,6 +1,22 @@
 import BrandForm from "../FormComponent/BrandForm/BrandForm";
+import BrandList from "../ListComponent/BrandList/BrandList";
+import marketApi from "../../../api/watchServerApi";
 
 function BrandControl() {
+    const [brands, setBrands] = useState([]);
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const brandsData = await getApiBrandList();
+                setBrands(brandsData);
+            } catch (error) {
+                console.error('Failed to load brands:', error);
+            }
+        };
+
+        marketApi.brandApi.getBrandList();
+    }, []); 
+
 
     return(
         <div className="container container-box">
@@ -15,7 +31,7 @@ function BrandControl() {
                 <div className="col-md-6">
                     <h4>Список брендов</h4>
                     <div>
-                        List categories
+                        <BrandList brands={brands} />
                     </div>
                 </div>
             </div>

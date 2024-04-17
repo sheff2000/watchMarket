@@ -14,9 +14,24 @@ const addBrand = async (data) => {
     }
 };
 
+const getBrendList = async () => {
+    try {
+        const result = await BrandWatch.getAllBrand();
+        console.log('add result - ', result);
+        return result;
+    }
+    catch(err) {
+        const error = new Error(err.message || `Internal server error`);
+        error.debug = `Error catch in add Brand Service. stack err - ${err.stack}`;
+        error.status = err.status || 500;
+        throw (error);
+    }
+};
+
 
 const brandService = {
     addBrand,
+    getBrendList,
 };
 
 export default brandService;

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import generateTranslit from '../utilits/translit.js';
 /***
  * схема и функции для работы с коллецией - Категории часов
  */
@@ -14,6 +14,13 @@ const categorySchema = new mongoose.Schema({
         required: true,
     },
     imageUrl: String,
+});
+
+categorySchema.pre('save', function(next) {
+    if (this.isModified('name')) {
+        this.translit = generateTranslit(this.name);
+    }
+    next();
 });
 
 const categoryModel = mongoose.model('Category', categorySchema);

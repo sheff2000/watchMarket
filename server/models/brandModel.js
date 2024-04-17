@@ -11,7 +11,7 @@ const brandSchema = new mongoose.Schema({
     },
     translit: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
     },
     imageUrl: String,
@@ -19,7 +19,7 @@ const brandSchema = new mongoose.Schema({
 
 brandSchema.pre('save', function(next) {
     if (this.isModified('name')) {
-        this.translit = toTranslit(this.name);
+        this.translit = generateTranslit(this.name);
     }
     next();
 });

@@ -3,6 +3,8 @@ import BrandWatch from '../models/brandModel.js';
 const addBrand = async (data) => {
     try {
         const result = await BrandWatch.addBrand(data);
+        console.log('add result - ', result);
+        return result;
     }
     catch(err) {
         const error = new Error(err.message || `Internal server error`);

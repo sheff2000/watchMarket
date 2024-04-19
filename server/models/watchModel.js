@@ -23,7 +23,14 @@ const watchSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Brand',
     },
-    collection: String,
+    price: {
+        type: Number,
+        required: true,
+        validate: {
+            validator: Number.isInteger,
+            message: 'Price must be an Number.'
+        }
+    },
     countryMade: String,
     gender: String, 
     caseColor: String,

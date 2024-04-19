@@ -66,12 +66,12 @@ function AddProductForm({ brands, onSubmit }) {
             </div>
             <div className="col-12">
                 <label htmlFor="formFileMultiple" className="form-label">Ссылки на фотографии (разделённые ';')</label>
-                <textarea className="form-control" id="formFileMultiple" name="imageUrl" value={formData.photoUrls} onChange={handleChange} required></textarea>
+                <textarea className="form-control" id="formFileMultiple" name="imageUrl" value={formData.imageUrl} onChange={handleChange} required></textarea>
             </div>
             <div className="col-md-6">
-                <label for="validationCustom04" className="form-label">Пол</label>
+                <label htmlFor="validationCustom04" className="form-label">Пол</label>
                 <select className="form-select" id="validationCustom04" name='gender' value={formData.gender} onChange={handleChange} required>
-                    <option selected disabled value="">выбрать...</option>
+                    <option disabled value="">выбрать...</option>
                     <option value="man">Мужской</option>
                     <option value="girl">Женский</option>
                     <option value="uni">Унисекс</option>
@@ -81,7 +81,7 @@ function AddProductForm({ brands, onSubmit }) {
                 </div>
             </div>
             <div className="col-md-6">
-                <label for="validationCustom05" className="form-label">Цвет корпуса</label>
+                <label htmlFor="validationCustom05" className="form-label">Цвет корпуса</label>
                 <input type="text" className="form-control" id="validationCustom05" name="caseColor" value={formData.caseColor} onChange={handleChange} placeholder="Красный" required />
 
                 <div className="valid-feedback">
@@ -91,16 +91,21 @@ function AddProductForm({ brands, onSubmit }) {
             <div className="col-md-4">
                 <label htmlFor="validationCustom04" className="form-label">Бренд</label>
                 <select className="form-select" id="validationCustom04" name="brand" value={formData.brand} onChange={handleChange} required>
-                    <option selected disabled value="">выбрать...</option>
+                    <option disabled value="">выбрать...</option>
                     {brands.map(brand => (
                         <option key={brand._id} value={brand._id}>{brand.name}</option>
                     ))}
                 </select>
             </div>
             <div className="col-md-4">
-                <label for="validationCustom06" className="form-label">Механизм</label>
-                <select className="form-select" id="validationCustom06" name="mechanism" value={formData.mechanism} onChange={handleChange} required>
-                    <option selected disabled value="">выбрать...</option>
+                <label htmlFor="validationCustom06" className="form-label">Механизм</label>
+                <select
+                    className="form-select"
+                    id="validationCustom06"
+                    name="mechanism"
+                    value={formData.mechanism}
+                    onChange={handleChange} required>
+                    <option disabled value="">выбрать...</option>
                     <option value="autokvarc">Автокварцевый</option>
                     <option value="kvarc">Кварц</option>
                     <option value="automanual">Механика с автоподзаводом</option>
@@ -111,9 +116,9 @@ function AddProductForm({ brands, onSubmit }) {
                 </div>
             </div>
             <div className="col-md-8">
-                <label for="validationCustom07" className="form-label">Материал</label>
+                <label htmlFor="validationCustom07" className="form-label">Материал</label>
                 <select className="form-select" id="validationCustom07" name="material" value={formData.material} onChange={handleChange} required>
-                    <option selected disabled value="">выбрать...</option>
+                    <option disabled value="">выбрать...</option>
                     <option value="autokvarc">Каучук</option>
                     <option value="kvarc">Керамика</option>
                     <option value="automanual">Нейлон</option>

@@ -1,10 +1,16 @@
 import './NewProducts.css';
 
-function NewProducts() {
+function NewProducts({watches}) {
     return (
-        <>
-            new product list
-        </>
+        <div className='brand-list-main-box'>
+            <div className='brand-list-section'>
+                {watches.map((watch, index) => (
+                    <div key={index} className='brand-card sections-brands-card'>   
+                        <img src={watch.imageUrl} alt={watch.name} />
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 

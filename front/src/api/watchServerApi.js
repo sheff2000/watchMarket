@@ -66,6 +66,22 @@ const getWatchList = async () => {
     }
 };
 
+const getWatchBrandList = async (brandId) => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/watch/brand/${brandId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;  
+    }
+};
+
 const deleteBrand = async (id) => {
     try {
         const response = await fetch(`${BASE_URL}/api/brand/${id}`, {
@@ -91,6 +107,7 @@ const marketApi = {
     watch: {
         addWatch,
         getWatchList,
+        getWatchBrandList,
     }
 };
 

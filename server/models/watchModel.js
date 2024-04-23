@@ -61,7 +61,11 @@ const updateWatch = async (id, data) => {
 
 // delete 
 const deleteWatch = async (id) => {
-    return await watchModelModel.findByIdAndDelete(id);
+    return await watchModel.findByIdAndDelete(id);
+};
+
+const getWatchesByBrand = async (brandId) => {
+    return await watchModel.find({ brand: brandId });
 };
 
 const Watch = {
@@ -70,6 +74,7 @@ const Watch = {
     getWatchById,
     updateWatch,
     deleteWatch,
+    getWatchesByBrand,
 };
 
 export default Watch;

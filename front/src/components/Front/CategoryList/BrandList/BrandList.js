@@ -5,7 +5,7 @@ function BrandList({ brands, onClickBrand}) {
         <div className='brand-list-main-box'>
             <div className='brand-list-section'>
                 {brands.map((brand, index) => (
-                    <div key={index} className='brand-card sections-brands-card'>   
+                    <div key={index} className='brand-card sections-brands-card' onClick={() => onClickBrand(brand._id)}>   
                         <img src={brand.imageUrl} alt={brand.name} />
                     </div>
                 ))}

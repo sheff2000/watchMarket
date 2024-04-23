@@ -42,7 +42,6 @@ const deleteWatch = async (id) => {
     }
 };
 
-
 const watchService = {
     addWatch,
     getWatchList,

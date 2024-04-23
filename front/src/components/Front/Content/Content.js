@@ -21,8 +21,26 @@ function Content() {
         fetchBrands();
     }, []); 
 
-    const onClickBrandEvent = async (brandId) => {
+    const [watches, setWatches] = useState([]);
 
+    // Функция для загрузки и обновления списка часов
+    //const fetchWatches = async () => {
+    //    try {
+    //        const watchesData = await marketApi.watch.getWatchList();
+    //        setWatches(watchesData);
+    //    } catch (error) {
+    //        console.error('Failed to load watches:', error);
+    //    }
+    //};
+
+    const onClickBrandEvent = async (brandId) => {
+        try {
+          const watchesData = await marketApi.watch.getWatchBrandList(brandId);
+          console.log('wathc brand - ',watchesData);
+          setWatches(watchesData);
+        } catch (error) {
+            console.error('Failed to delete brand:', error);
+        }
     };
 
     return (
@@ -31,7 +49,7 @@ function Content() {
           <Route path="/" element={
             <>
               <BrandList brands={brands} onClickBrand={onClickBrandEvent}/>
-              <NewProducts />
+              <NewProducts watches={watches}/>
             </>
           } />
           <Route path="/product/:productId" element={<ProductDetails />} />

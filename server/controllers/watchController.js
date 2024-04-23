@@ -1,4 +1,5 @@
 import watchService from "../services/watchsService.js";
+import Watch from "../models/watchModel.js";
 
 const getAllWatchs = async (req, res, next) => {
     try {
@@ -29,9 +30,23 @@ const add = async (req, res, next) => {
     };
 };
 
+const getWatchesByBrand = async (req, res, next) => {
+    try {
+        const brandId = req.params.brandId; 
+        const watches = await Watch.getWatchesByBrand(brandId);
+        res.status(200).json(watches);
+    } catch (err) {
+        console.error('Error retrieving watches by brand:', err);
+        const error = new Error(err.message || "Internal server error");
+        error.status = error.status || 500;
+        return next(error);
+    }
+};
+
 const watchControllers = {
     getAllWatchs,
     add,
+    getWatchesByBrand,
 };
 
 export default watchControllers;

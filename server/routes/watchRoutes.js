@@ -10,5 +10,6 @@ watchRouter.get('/', watchControllers.getAllWatchs);
 watchRouter.post('/', watchControllers.add);
 watchRouter.delete('/:id');
 watchRouter.patch('/:id');
+watchRouter.get('/brand/:brandId', watchControllers.getWatchesByBrand);
 
 export default watchRouter;

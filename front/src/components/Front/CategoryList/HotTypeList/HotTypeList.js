@@ -1,5 +1,4 @@
 import './HotTypeList.css';
-
 function HotTypeList() {
     return (
         <>

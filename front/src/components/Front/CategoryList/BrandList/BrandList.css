@@ -1,0 +1,35 @@
+.brand-list-main-box {
+    margin-top: 70px;
+    background-color: black;
+    width: 100%;
+    padding: 54px 70px;
+}
+
+.brand-list-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px;
+}
+.brand-card  {
+    border-right: 1px solid #a7a5a5; 
+    border-left: 1px solid #a7a5a5; 
+    padding: 20px; 
+    text-align: center;
+}
+.sections-brands-card {
+    padding: 30px 13px;
+    border-radius: 8px;
+    background-color: #030911;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+.sections-brands-card:hover {
+    background-color: gray;
+}
+.brand-card img {
+    width: 200px;
+    height: 100%;
+    object-fit: contain;
+    vertical-align: middle;
+    border-style: none;
+}

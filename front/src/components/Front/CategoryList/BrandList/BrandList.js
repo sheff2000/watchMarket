@@ -1,10 +1,16 @@
 import './BrandList.css';
 
-function BrandList() {
+function BrandList({ brands, onClickBrand}) {
     return (
-        <>
-            brand list 
-        </>
+        <div className='brand-list-main-box'>
+            <div className='brand-list-section'>
+                {brands.map((brand, index) => (
+                    <div key={index} className='brand-card sections-brands-card'>   
+                        <img src={brand.imageUrl} alt={brand.name} />
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 

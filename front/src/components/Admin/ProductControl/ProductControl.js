@@ -4,63 +4,66 @@ import AddProductForm from '../FormComponent/AddProductForm/AddProductForm';
 import ProductList from '../ListComponent/ProductList/ProductList';
 
 function ProductControl() {
-
     const [activeList, setActiveList] = useState('product_add');
     const [brands, setBrands] = useState([]);
+    const [watches, setWatches] = useState([]);
+    const [editingWatch, setEditingWatch] = useState(null); // Новое состояние для хранения данных редактируемого товара
 
+    // Загрузка брендов и часов
     useEffect(() => {
-        const fetchBrands = async () => {
+        const fetchData = async () => {
             try {
                 const brandsData = await marketApi.brandApi.getBrandList();
                 setBrands(brandsData);
+                const watchesData = await marketApi.watch.getWatchList();
+                setWatches(watchesData);
             } catch (error) {
-                console.error('Failed to load brands:', error);
+                console.error('Failed to load data:', error);
             }
         };
+        fetchData();
+    }, []);
 
-        fetchBrands();
-    }, []); 
-
-    const [watches, setWatches] = useState([]);
-
-    // Функция для загрузки и обновления списка часов
-    const fetchWatches = async () => {
+    const handleDeleteWatch = async (id) => {
         try {
-            const watchesData = await marketApi.watch.getWatchList();
-            setWatches(watchesData);
+            await marketApi.watch.deleteWatch(id);
+            setWatches(watches.filter(watch => watch._id !== id));
         } catch (error) {
-            console.error('Failed to load watches:', error);
+            console.error('Failed to delete watch:', error);
         }
     };
 
-    useEffect(() => {
-        fetchWatches();  // Загрузка списка часов при монтировании компонента
-    }, []);
-
-
-    const handleButtonClick = (buttonName) => {
-        setActiveList(buttonName);
+    const handleEditWatch = (watch) => {
+        setEditingWatch(watch); 
+        setActiveList('product_add'); 
     };
 
     const handleAddWatch = async (formData) => {
         try {
-            await marketApi.watch.addWatch(formData);
-            fetchWatches();
+            if (editingWatch) {
+                await marketApi.watch.updateWatch(editingWatch._id, formData);
+            } else {
+                await marketApi.watch.addWatch(formData);
+            }
+            setEditingWatch(null); 
+            setActiveList('product_list'); 
+            const watchesData = await marketApi.watch.getWatchList();
+            setWatches(watchesData);
         } catch (error) {
-            console.error('Failed to delete brand:', error);
+            console.error('Failed to add/update watch:', error);
         }
     };
 
     const getActiveComponent = () => {
         switch (activeList) {
             case 'product_add':
-                return <AddProductForm brands={brands} onSubmit={handleAddWatch}/>;
+                return <AddProductForm brands={brands} onSubmit={handleAddWatch} formData={editingWatch} />;
             case 'product_list':
-                return <ProductList watchs={watches} />;
+                return <ProductList watches={watches} onDelete={handleDeleteWatch} onEdit={handleEditWatch} />;
             default:
-                return <AddProductForm brands={brands} onSubmit={handleAddWatch}/>;
+                return <AddProductForm brands={brands} onSubmit={handleAddWatch} formData={editingWatch} />;
         }
-      };
+    };
 
     return(
         <div className="container container-box ">
@@ -70,14 +73,14 @@ function ProductControl() {
                     <button
                         type="button"
                         className={`btn btn-outline-primary ${activeList === 'product_list' ? 'active' : ''}`}
-                        onClick={() => handleButtonClick('product_list')}
+                        onClick={() => setActiveList('product_list')}
                     >
                         Список часов
                     </button>
                     <button
                         type="button"
                         className={`btn btn-outline-primary ${activeList === 'product_add' ? 'active' : ''}`}
-                        onClick={() => handleButtonClick('product_add')}
+                        onClick={() => setActiveList('product_add')}
                     >
                         Добавить часы
                     </button>

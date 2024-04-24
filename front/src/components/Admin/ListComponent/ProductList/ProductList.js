@@ -1,16 +1,16 @@
-function ProductList({ watchs }) { // Используйте деструктуризацию для пропсов
-    
-    console.log(watchs);
-
+function ProductList({ watches, onDelete, onEdit }) {
     return (
         <div>
             <h2>Product List</h2>
             <ul>
-            _id, nameWatch, inStock, brand, gender, caseColor, mechanism, material, createdAt
-                {watchs.map((watch, index) => (
-                    <li key={index}>
+                {watches.map((watch) => (
+                    <li key={watch._id}>
                         {watch.nameWatch} - {watch.price} грн
-                        {watch.photoUrls && <img src={watch.imageUrl.split(';')[0]} alt={watch.nameWatch} style={{ width: '100px' }} />}
+                        {watch.imageUrl && (
+                            <img src={watch.imageUrl.split(';')[0]} alt={watch.nameWatch} style={{ width: '100px' }} />
+                        )}
+                        <button onClick={() => onDelete(watch._id)}>Удалить</button>
+                        <button onClick={() => onEdit(watch)}>Редактировать</button>
                     </li>
                 ))}
             </ul>

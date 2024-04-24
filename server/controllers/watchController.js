@@ -43,10 +43,41 @@ const getWatchesByBrand = async (req, res, next) => {
     }
 };
 
+const deleteWatch = async (req, res, next) => {
+    console.log('controll delete');
+    try {
+
+        const id = req.params.id;
+            
+        const result = await watchService.deleteWatch(id);
+        
+        return res.status(200).json(result);
+    } catch (err) {
+        console.log('Error  - ', err);
+        const error = new Error(err.debug || "Internal server error");
+        error.status = error.status || 500;
+        return next(error);
+    };
+};
+
+const updateWatch = async (req, res, next) => {
+    const { id } = req.params; 
+    const data = req.body; 
+
+    try {
+        const updatedWatch = await watchService.updateWatch(id, data);
+        return res.status(200).json(updatedWatch);
+    } catch (error) {
+        next(error);
+    }
+};
+
 const watchControllers = {
     getAllWatchs,
     add,
     getWatchesByBrand,
+    deleteWatch,
+    updateWatch,
 };
 
 export default watchControllers;

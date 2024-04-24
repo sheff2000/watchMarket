@@ -42,10 +42,26 @@ const deleteWatch = async (id) => {
     }
 };
 
+const updateWatch = async (id, data) => {
+    try {
+        const result = await Watch.updateWatch(id, data);
+        console.log('update result - ', result);
+        return result;
+    } catch (err) {
+        console.error('Error updating watch:', err);
+        const error = new Error(err.message || "Internal server error");
+        error.debug = `Error catch in update Watch Service. stack err - ${err.stack}`;
+        error.status = err.status || 500;
+        throw error;
+    }
+};
+
+
 const watchService = {
     addWatch,
     getWatchList,
     deleteWatch,
+    updateWatch,
 };
 
 export default watchService;

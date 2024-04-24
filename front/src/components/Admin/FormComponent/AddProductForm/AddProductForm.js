@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function AddProductForm({ brands, onSubmit }) {
+function AddProductForm({ brands, onSubmit, formData: initialFormData }) {
     const [formData, setFormData] = useState({
         nameWatch: '',
         inStock: false,
@@ -12,6 +12,14 @@ function AddProductForm({ brands, onSubmit }) {
         material: '',
         brand: ''
     });
+
+    // Инициализация формы при редактировании
+    useEffect(() => {
+        if (initialFormData) {
+            setFormData(initialFormData);
+        }
+    }, [initialFormData]);
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;

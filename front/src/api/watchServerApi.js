@@ -98,6 +98,39 @@ const deleteBrand = async (id) => {
     }
 };
 
+const deleteWatch = async (id) => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/watch/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;  
+    }
+};
+
+const updateWatch = async (id, formData) => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/watch/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating watch:', error);
+        throw error;  
+    }
+};
+
 const marketApi = {
     brandApi: {
         addBrand,
@@ -108,6 +141,8 @@ const marketApi = {
         addWatch,
         getWatchList,
         getWatchBrandList,
+        deleteWatch,
+        updateWatch,
     }
 };
 

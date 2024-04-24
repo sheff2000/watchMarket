@@ -4,9 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import NewProducts from '../Products/NewProducts/NewProducts';
 import ProductDetails from '../Products/ProductDetails/ProductDetails';
 import BrandList from '../CategoryList/BrandList/BrandList';
+import './Content.css';
 
 function Content() {
 
+    const [titlePage, setTitlePage] = useState('Топ годинники');
+    const [watches, setWatches] = useState([]);
     const [brands, setBrands] = useState([]);
     useEffect(() => {
         const fetchBrands = async () => {
@@ -20,8 +23,6 @@ function Content() {
 
         fetchBrands();
     }, []); 
-
-    const [watches, setWatches] = useState([]);
 
     // Функция для загрузки и обновления списка часов
     //const fetchWatches = async () => {
@@ -49,6 +50,7 @@ function Content() {
           <Route path="/" element={
             <>
               <BrandList brands={brands} onClickBrand={onClickBrandEvent}/>
+              <h1 className='container'>{titlePage}</h1>
               <NewProducts watches={watches}/>
             </>
           } />

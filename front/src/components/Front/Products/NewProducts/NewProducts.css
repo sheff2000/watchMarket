@@ -1,0 +1,19 @@
+
+.watch-list-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+}
+.sections-watch-card {
+    padding: 30px 13px;
+    border-radius: 8px;
+    color: black;
+    background-color: white;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+.sections-watch-card:hover {
+    background-color: black;
+    color: white;
+}

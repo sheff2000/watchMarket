@@ -38,6 +38,10 @@ function Content() {
         try {
           const watchesData = await marketApi.watch.getWatchBrandList(brandId);
           console.log('wathc brand - ',watchesData);
+          const brand = brands.find(brand => brand._id === brandId);
+          const brandName = brand ? brand.name : 'Топ годинники';
+        
+          setTitlePage(`Годинники ${brandName}`); // Установка заголовка страницы
           setWatches(watchesData);
         } catch (error) {
             console.error('Failed to delete brand:', error);

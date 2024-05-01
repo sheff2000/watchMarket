@@ -16,6 +16,8 @@ function Content() {
             try {
                 const brandsData = await marketApi.brandApi.getBrandList();
                 setBrands(brandsData);
+                const watchesData = await marketApi.watch.getWatchList();
+                setWatches(watchesData);
             } catch (error) {
                 console.error('Failed to load brands:', error);
             }
@@ -51,14 +53,16 @@ function Content() {
     return (
       <div className="">
         <Routes>
+          <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/" element={
             <>
               <BrandList brands={brands} onClickBrand={onClickBrandEvent}/>
               <h1 className='container'>{titlePage}</h1>
+              <hr/>
               <NewProducts watches={watches}/>
             </>
           } />
-          <Route path="/product/:productId" element={<ProductDetails />} />
+          
         </Routes>
       </div>
     );

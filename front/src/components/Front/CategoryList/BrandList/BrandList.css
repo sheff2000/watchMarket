@@ -9,6 +9,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 10px;
+    background-color: #030911;
+    padding: 24px;
 }
 .brand-card  {
     border-right: 1px solid #a7a5a5; 
